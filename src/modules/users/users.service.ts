@@ -27,4 +27,12 @@ export class UsersService {
       throw new BadRequestException(error);
     }
   }
+
+  async getUserByEmail(email: string): Promise<User | null> {
+    return this.usersRepository.findUserByEmail(email);
+  }
+
+  async getUserById(id: string): Promise<User | null> {
+    return this.usersRepository.findUserById(id);
+  }
 }
