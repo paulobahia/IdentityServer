@@ -9,6 +9,8 @@ import { UsersModule } from '../users/users.module';
 import { PassportModule } from '@nestjs/passport';
 import { UsersService } from '../users/users.service';
 import { UsersRepository } from '../users/users.repository';
+import { RestaurantsService } from '../restaurants/restaurants.service';
+import { RestaurantsRepository } from '../restaurants/restaurants.repository';
 
 @Module({
   imports: [
@@ -21,6 +23,6 @@ import { UsersRepository } from '../users/users.repository';
     }),
   ],
   controllers: [AuthsController],
-  providers: [AuthsService, JwtStrategy, LocalStrategy, UsersService, UsersRepository],
+  providers: [AuthsService, JwtStrategy, LocalStrategy, UsersService, UsersRepository, RestaurantsService, RestaurantsRepository],
 })
 export class AuthsModule { }
