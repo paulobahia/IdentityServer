@@ -12,5 +12,7 @@ export const MessagesHelper = {
     USER_NOT_FOUND: 'User not found',
     BIRTHDATE_REQUIRED: 'Birthdate is required',
     GENDER_REQUIRED: 'Gender is required',
-    INVALID_DATE_FORMAT: 'Invalid date format. Please provide a date in the format DD-MM-YYYY.'
+    INVALID_DATE_FORMAT: 'Invalid date format. Please provide a date in the format DD-MM-YYYY.',
+    RESTAURANTID_REQUIRED: 'Restaurant is required.',
+    RESTAURANTID_NOT_FOUND: 'Restaurant not found.'
 }

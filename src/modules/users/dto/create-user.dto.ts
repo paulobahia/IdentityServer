@@ -1,21 +1,32 @@
-import { z } from 'zod';
+import { IsEmail, IsNotEmpty, IsString, Matches, MaxLength, MinLength } from 'class-validator';
 import { MessagesHelper } from 'src/helpers/messages.helper';
 import { RegExHelper } from 'src/helpers/regex.helper';
 
-enum Roles {
-    ADMIN = "ADMIN",
-    WAITER = "WAITER",
-    KITCHEN = "KITCHEN",
-    MANAGER = "MANAGER"
+export class CreateUserDto {
+
+  @IsNotEmpty({ message: MessagesHelper.NAME_REQUIRED })
+  @IsString()
+  name: string;
+
+  @IsNotEmpty({ message: MessagesHelper.EMAIL_REQUIRED })
+  @IsEmail({}, { message: MessagesHelper.EMAIL_VALID })
+  email: string;
+
+  @IsNotEmpty({ message: MessagesHelper.PASSWORD_REQUIRED })
+  @MinLength(8)
+  @MaxLength(30)
+  @Matches(RegExHelper.password, { message: MessagesHelper.PASSWORD_VALID })
+  password: string;
+
+  @IsNotEmpty({ message: MessagesHelper.BIRTHDATE_REQUIRED })
+  birthDate: Date;
+
+  @IsNotEmpty({ message: MessagesHelper.GENDER_REQUIRED })
+  gender: string;
+
+  @IsNotEmpty({ message: MessagesHelper.ROLE_REQUIRED })
+  role: string;
+
+  @IsNotEmpty({ message: MessagesHelper.RESTAURANTID_REQUIRED })
+  restaurantId: string;
 }
-
-export const CreateUserDto = z.object({
-    name: z.string().nonempty({ message: MessagesHelper.NAME_REQUIRED }),
-    email: z.string().nonempty({ message: MessagesHelper.EMAIL_REQUIRED }).email({ message: MessagesHelper.EMAIL_VALID }),
-    password: z.string().nonempty({ message: MessagesHelper.PASSWORD_REQUIRED }).min(8).refine(password => RegExHelper.password.test(password), { message: MessagesHelper.PASSWORD_VALID, path: ['password'], }),
-    birthDate: z.string().datetime({ message: MessagesHelper.BIRTHDATE_REQUIRED }),
-    gender: z.string({ required_error: MessagesHelper.GENDER_REQUIRED }),
-    role: z.enum([Roles.ADMIN, Roles.WAITER, Roles.KITCHEN, Roles.MANAGER]).refine(role => Object.values(Roles).includes(role), { message: MessagesHelper.ROLE_INVALID, path: ['role'] })
-});
-
-export type CreateUserDtoType = z.infer<typeof CreateUserDto>;
