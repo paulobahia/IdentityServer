@@ -12,6 +12,6 @@ export class AuthsController {
   @HttpCode(200)
   async login(@Req() req: any, @Res({ passthrough: true }) response: Response) {
     const jwt = await this.authsService.authUser(req.user);
-    response.cookie('jwt', jwt, { httpOnly: true, maxAge: 3600000 })
+    response.cookie('jwt', jwt, { httpOnly: true, maxAge: 3600000, sameSite: 'strict' })
   }
 }
