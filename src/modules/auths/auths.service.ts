@@ -4,6 +4,14 @@ import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcrypt';
 import { User } from '../users/entities/user.entity';
 
+interface AuthenticatedUser {
+    id: string;
+    email: string;
+    token: string;
+    role: string;
+    restaurantId: string;
+}
+
 @Injectable()
 export class AuthsService {
     constructor(
@@ -32,7 +40,7 @@ export class AuthsService {
     }
 
     async authUser(data: AuthenticatedUser) {
-        const payload = { sub: data.id, email: data.email, role: data.role }
+        const payload = { sub: data.id, email: data.email, role: data.role, restaurantId: data.restaurantId }
         return this.jwtService.sign(payload)
     }
 }

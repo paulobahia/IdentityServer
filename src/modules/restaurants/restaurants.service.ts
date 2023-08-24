@@ -9,12 +9,12 @@ export class RestaurantsService {
   constructor(private readonly restaurantsRepository: RestaurantsRepository) { }
 
   async getRestaurantById(restaurantId: string): Promise<Restaurant | null> {
-    return this.restaurantsRepository.findRestaurantById(restaurantId)
+    return await this.restaurantsRepository.findRestaurantById(restaurantId)
   }
 
   async createRestaurant(data: CreateRestaurantDto): Promise<Restaurant> {
     try {
-      return this.restaurantsRepository.createRestaurant(data)
+      return await this.restaurantsRepository.createRestaurant(data)
     } catch (error) {
       throw new BadRequestException(error);
 

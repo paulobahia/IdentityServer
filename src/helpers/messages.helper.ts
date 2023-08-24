@@ -14,5 +14,6 @@ export const MessagesHelper = {
     GENDER_REQUIRED: 'Gender is required',
     INVALID_DATE_FORMAT: 'Invalid date format. Please provide a date in the format DD-MM-YYYY.',
     RESTAURANTID_REQUIRED: 'Restaurant is required.',
-    RESTAURANTID_NOT_FOUND: 'Restaurant not found.'
+    RESTAURANTID_NOT_FOUND: 'Restaurant not found.',
+    TOKEN_INVALID: 'Invalid or expired token. Please authenticate again.'
 }

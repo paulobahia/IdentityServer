@@ -42,7 +42,7 @@ export class UsersService {
     return this.usersRepository.findUserById(id);
   }
 
-  async getAllUsers() {
-    // return this.usersRepository.findAllUsersByRestaurantId()
+  async getAllUsersByRestaurantId(id: string) {
+    return this.usersRepository.findAllUsersByRestaurantId(id)
   }
 }

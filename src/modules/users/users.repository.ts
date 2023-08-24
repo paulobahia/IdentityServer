@@ -20,7 +20,27 @@ export class UsersRepository {
     }
 
     async findUserById(id: string): Promise<User | null> {
-        return null
+        const user = await this.prisma.user.findUnique({
+            where: { id }
+        })
+
+        return user as User | null;
+    }
+
+    async findAllUsersByRestaurantId(id: string): Promise<User[] | null> {
+        const users = await this.prisma.user.findMany({
+            where: { restaurantId: id },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                birthDate: true,
+                gender: true,
+                role: true,
+            }
+        })
+
+        return users as User[] | null
     }
 
 
