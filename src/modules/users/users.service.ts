@@ -45,4 +45,14 @@ export class UsersService {
   async getAllUsersByRestaurantId(id: string) {
     return this.usersRepository.findAllUsersByRestaurantId(id)
   }
+
+  async checkExistEmail(email: string) {
+    const user = await this.usersRepository.findUserByEmail(email)
+
+    if (user) {
+      throw new ConflictException(MessagesHelper.EMAIL_ALREADY_EXISTS)
+    }
+
+    return
+  }
 }

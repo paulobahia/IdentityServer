@@ -20,4 +20,10 @@ export class UsersController {
   async getAllUsersByRestaurant(@RestaurantId() restaurantId: string) {
     return await this.usersService.getAllUsersByRestaurantId(restaurantId)
   }
+
+  @Get('check-email')
+  @HttpCode(204)
+  async checkExistEmail(@Body() body: { email: string }) {
+    await this.usersService.checkExistEmail(body.email)
+  }
 }
