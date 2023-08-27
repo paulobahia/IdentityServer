@@ -4,7 +4,9 @@ import { User } from './entities/user.entity';
 import { JwtGuard } from '../auths/strategies/jwt/jwt.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { RestaurantId } from 'src/decorators/request-context';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Users')
 @Controller('api/users')
 @UseGuards(JwtGuard)
 export class UsersController {
@@ -21,9 +23,9 @@ export class UsersController {
     return await this.usersService.getAllUsersByRestaurantId(restaurantId)
   }
 
-  @Get('check-email')
   @HttpCode(204)
-  async checkExistEmail(@Body() body: { email: string }) {
-    await this.usersService.checkExistEmail(body.email)
+  @Post('check-email')
+  async checkExistEmail(@Body() data: { email: string }) {
+    await this.usersService.checkExistEmail(data.email)
   }
 }

@@ -1,6 +1,5 @@
 import { IsEmail, IsNotEmpty, IsString, Matches, MaxLength, MinLength } from 'class-validator';
 import { MessagesHelper } from 'src/helpers/messages.helper';
-import { RegExHelper } from 'src/helpers/regex.helper';
 
 export class CreateUserDto {
 
@@ -15,7 +14,6 @@ export class CreateUserDto {
   @IsNotEmpty({ message: MessagesHelper.PASSWORD_REQUIRED })
   @MinLength(8)
   @MaxLength(30)
-  @Matches(RegExHelper.password, { message: MessagesHelper.PASSWORD_VALID })
   password: string;
 
   @IsNotEmpty({ message: MessagesHelper.BIRTHDATE_REQUIRED })

@@ -2,7 +2,9 @@ import { Req, Post, Controller, UseGuards, Res, HttpCode } from '@nestjs/common'
 import { AuthsService } from './auths.service';
 import { LocalGuard } from './strategies/local/local.guard';
 import { Response } from 'express';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auths')
 @Controller('api/auth')
 @UseGuards(LocalGuard)
 export class AuthsController {
