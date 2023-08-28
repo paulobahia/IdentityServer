@@ -1,4 +1,4 @@
-import { Injectable, ConflictException, InternalServerErrorException, BadRequestException } from '@nestjs/common';
+import { Injectable, ConflictException, BadRequestException, ForbiddenException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { UsersRepository } from './users.repository';
 import { MessagesHelper } from 'src/helpers/messages.helper';
@@ -51,6 +51,20 @@ export class UsersService {
 
     if (user) {
       throw new ConflictException(MessagesHelper.EMAIL_ALREADY_EXISTS)
+    }
+
+    return
+  }
+
+  async resetPassword(email: string) {
+    const user = await this.usersRepository.findUserByEmail(email)
+
+    if (!user) {
+      throw new ConflictException(MessagesHelper.USER_NOT_FOUND)
+    }
+
+    if (user.role == 'ADMIN') {
+      throw new ForbiddenException(MessagesHelper.ADMIN_PASSWORD_RESET_RESTRICTION)
     }
 
     return

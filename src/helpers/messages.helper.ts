@@ -15,5 +15,6 @@ export const MessagesHelper = {
     INVALID_DATE_FORMAT: 'Formato de data inválido. Por favor, forneça uma data no formato DD-MM-AAAA.',
     RESTAURANTID_REQUIRED: 'O RestauranteId é obrigatório.',
     RESTAURANTID_NOT_FOUND: 'Restaurante não encontrado.',
-    TOKEN_INVALID: 'Token inválido ou expirado. Por favor, faça a autenticação novamente.'
+    TOKEN_INVALID: 'Token inválido ou expirado. Por favor, faça a autenticação novamente.',
+    ADMIN_PASSWORD_RESET_RESTRICTION: 'A redefinição de senha não está disponível para administradores.'
 }

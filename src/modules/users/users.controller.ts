@@ -3,8 +3,9 @@ import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { JwtGuard } from '../auths/strategies/jwt/jwt.guard';
 import { CreateUserDto } from './dto/create-user.dto';
-import { RestaurantId } from 'src/decorators/request-context';
+import { RestaurantId } from 'src/decorators/request-context.decorator';
 import { ApiTags } from '@nestjs/swagger';
+import { IsPublic } from 'src/decorators/is-public.decorator';
 
 @ApiTags('Users')
 @Controller('api/users')
@@ -27,5 +28,11 @@ export class UsersController {
   @Post('check-email')
   async checkExistEmail(@Body() data: { email: string }) {
     await this.usersService.checkExistEmail(data.email)
+  }
+
+  @IsPublic()
+  @Post('reset-password')
+  async resetPassword(@Body() data: { email: string }) {
+    await this.usersService.resetPassword(data.email)
   }
 }
