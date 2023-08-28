@@ -4,6 +4,7 @@ import { JwtGuard } from '../auths/strategies/jwt/jwt.guard';
 import { Restaurant } from './entities/restaurant.entity';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { RestaurantId } from 'src/decorators/request-context';
 
 @ApiTags('Restaurants')
 @Controller('api/restaurants')
@@ -15,6 +16,12 @@ export class RestaurantsController {
   @HttpCode(204)
   async createRestaurant(@Body() data: CreateRestaurantDto): Promise<Restaurant> {
     return this.restaurantsService.createRestaurant(data)
+  }
+
+  @Post("restaurant-code")
+  async generateCode(@Body() data: { role: string }, @RestaurantId() restaurantId: string) {
+    const restaurantCode = await this.restaurantsService.generateCode(data.role, restaurantId);
+    return restaurantCode;
   }
 
 }
