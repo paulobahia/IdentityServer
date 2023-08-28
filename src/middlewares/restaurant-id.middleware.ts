@@ -1,7 +1,7 @@
 import { Headers, Injectable, NestMiddleware, UnauthorizedException } from '@nestjs/common'
 import { Request, Response, NextFunction } from 'express'
 import { verify } from 'jsonwebtoken';
-import { MessagesHelper } from 'src/helpers/messages.helper';
+import { MessagesHelper } from '../helpers/messages.helper';
 import { Restaurant } from 'src/modules/restaurants/entities/restaurant.entity';
 import { RestaurantsService } from 'src/modules/restaurants/restaurants.service';
 
