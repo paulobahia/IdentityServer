@@ -4,7 +4,7 @@ import { JwtGuard } from '../auths/strategies/jwt/jwt.guard';
 import { Restaurant } from './entities/restaurant.entity';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { RestaurantId } from 'src/decorators/request-context';
+import { RestaurantId } from '../../decorators/request-context';
 
 @ApiTags('Restaurants')
 @Controller('api/restaurants')

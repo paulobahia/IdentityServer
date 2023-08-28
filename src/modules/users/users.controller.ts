@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { JwtGuard } from '../auths/strategies/jwt/jwt.guard';
 import { CreateUserDto } from './dto/create-user.dto';
-import { RestaurantId } from 'src/decorators/request-context';
+import { RestaurantId } from '../../decorators/request-context';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Users')
