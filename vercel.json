@@ -4,11 +4,6 @@
         {
             "src": "src/main.ts",
             "use": "@vercel/node"
-        },
-        {
-            "use": "@vercel/static",
-            "src": "prisma/schema.prisma",
-            "config": { "zeroConfig": true }
         }
     ],
     "routes": [
