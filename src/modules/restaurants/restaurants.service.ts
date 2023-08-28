@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Restaurant } from './entities/restaurant.entity';
 import { RestaurantsRepository } from './restaurants.repository';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
-import { decrypt, encrypt } from '../../utils/crypto';
+import { decrypt, encrypt } from 'src/utils/crypto';
 
 @Injectable()
 export class RestaurantsService {

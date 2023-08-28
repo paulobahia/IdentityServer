@@ -2,8 +2,8 @@ import { Headers, Injectable, NestMiddleware, UnauthorizedException } from '@nes
 import { Request, Response, NextFunction } from 'express'
 import { verify } from 'jsonwebtoken';
 import { MessagesHelper } from '../helpers/messages.helper';
-import { Restaurant } from '../modules/restaurants/entities/restaurant.entity';
-import { RestaurantsService } from '../modules/restaurants/restaurants.service';
+import { Restaurant } from 'src/modules/restaurants/entities/restaurant.entity';
+import { RestaurantsService } from 'src/modules/restaurants/restaurants.service';
 
 interface JwtPayload {
     sub: string;
