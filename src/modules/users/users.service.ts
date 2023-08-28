@@ -1,7 +1,7 @@
 import { Injectable, ConflictException, InternalServerErrorException, BadRequestException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { UsersRepository } from './users.repository';
-import { MessagesHelper } from '../../helpers/messages.helper';
+import { MessagesHelper } from 'src/helpers/messages.helper';
 import { encodePassword } from 'src/utils/bcrypt';
 import { RestaurantsService } from '../restaurants/restaurants.service';
 import { CreateUserDto } from './dto/create-user.dto';
