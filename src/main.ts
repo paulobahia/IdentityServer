@@ -5,10 +5,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.enableCors({
-    origin: 'http://localhost:8000',
-    credentials: true,
-  })
+  app.enableCors()
 
   const config = new DocumentBuilder()
     .setTitle('Identity Server')
@@ -19,6 +16,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/swagger', app, document);
 
-  await app.listen(5001);
+  await app.listen(process.env.PORT || 5001);
 }
 bootstrap();
