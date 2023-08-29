@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, UseGuards,
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { JwtGuard } from '../auths/strategies/jwt/jwt.guard';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, PostUserDto } from './dto/create-user.dto';
 import { RestaurantId } from 'src/decorators/request-context.decorator';
 import { ApiTags } from '@nestjs/swagger';
 import { IsPublic } from 'src/decorators/is-public.decorator';
@@ -15,7 +15,7 @@ export class UsersController {
 
   @Post()
   @HttpCode(204)
-  async createUser(@Body() data: CreateUserDto): Promise<User> {
+  async createUser(@Body() data: PostUserDto): Promise<User> {
     return this.usersService.createUser(data)
   }
 
@@ -24,6 +24,7 @@ export class UsersController {
     return await this.usersService.getAllUsersByRestaurantId(restaurantId)
   }
 
+  @IsPublic()
   @HttpCode(204)
   @Post('check-email')
   async checkExistEmail(@Body() data: { email: string }) {

@@ -15,6 +15,5 @@ export function decrypt(encryptedCode: string): { restaurantId: string; role: st
     let decryptedCode = decipher.update(encryptedCode, 'hex', 'utf8');
     decryptedCode += decipher.final('utf8');
     const [restaurantId, role] = decryptedCode.split('%');
-    console.log(decryptedCode)
     return { restaurantId, role };
 }

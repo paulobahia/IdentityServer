@@ -4,13 +4,14 @@ import { UsersRepository } from './users.repository';
 import { MessagesHelper } from 'src/helpers/messages.helper';
 import { encodePassword } from 'src/utils/bcrypt';
 import { RestaurantsService } from '../restaurants/restaurants.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, PostUserDto } from './dto/create-user.dto';
+import { decrypt } from 'src/utils/crypto';
 
 @Injectable()
 export class UsersService {
   constructor(private readonly usersRepository: UsersRepository, private readonly restaurantsService: RestaurantsService) { }
 
-  async createUser(data: CreateUserDto): Promise<User> {
+  async createUser(data: PostUserDto): Promise<User> {
     try {
 
       const existingUser = await this.usersRepository.findUserByEmail(data.email)
@@ -19,7 +20,9 @@ export class UsersService {
         throw new ConflictException(MessagesHelper.EMAIL_ALREADY_EXISTS)
       }
 
-      const existRestaurant = await this.restaurantsService.getRestaurantById(data.restaurantId)
+      const { restaurantId, role } = decrypt(data.restaurantCode)
+
+      const existRestaurant = await this.restaurantsService.getRestaurantById(restaurantId)
 
       if (!existRestaurant) {
         throw new ConflictException(MessagesHelper.RESTAURANTID_NOT_FOUND)
@@ -27,7 +30,7 @@ export class UsersService {
 
       const password = encodePassword(data.password)
 
-      return this.usersRepository.createUser({ ...data, password });
+      return this.usersRepository.createUser({ ...data, password, restaurantId, role });
 
     } catch (error) {
       throw new BadRequestException(error);
